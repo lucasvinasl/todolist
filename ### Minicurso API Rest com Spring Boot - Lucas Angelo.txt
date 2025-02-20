@@ -1,0 +1,69 @@
+### Minicurso API Rest com Spring Boot - Lucas Angelo
+
+
+Passo 1 - Criar Spring Project no Spring initializer:
+
+	Adiciona as Dependências:
+
+	JPA - banco de dados relacionais em java
+
+	Hibernate - Implementação do JPA
+
+	Starter web - criar aplicação web e API REST 
+
+	devtools- hot load
+
+	h2database - banco de dados em memória (inicialização rápida)
+
+	mysql - Driver JDBC do MySql
+
+	starter-test - Junit/Mockito/etc.
+
+	maven-plugin - criar um jar.exe
+
+
+
+Passo 2 - Criar Repositório Git via Git Bash:
+
+	Cria o repositoy manual o git.
+
+	Adiciona todo o path via gitbash, basicamente copia os comandos lá do git.
+
+
+Passo 3 - Configuração inicial do SpringBoot:
+
+## Isso aqui já vem padrão, que é o nome da aplicação:
+
+spring.application.name=todolist
+
+## Habilita códigos de cores ANSI no console do IntelliJ:
+
+spring.output.ansi.enable=ALWAYS
+
+## Configurando Conexão com BD:
+
+* Definir o Driver JBDC do MySqL:
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+* Informa que o mysql vai rodar localmente e cria a tabela caso não exista:
+spring.datasource.url=jdbc:mysql://localhost:3306/todolistdb?createDatabaseIfNotExist=true
+
+* Credenciais do banco:
+spring.datasource.username=root
+spring.datasource.password=root
+
+## Configurando Hibernate:
+
+* Estratégia Hibernate:
+spring.jpa.hibernate.ddl-auto=update
+
+Define a estratégia do Hibernate para manipular o esquema do banco de dados:
+update → Atualiza o esquema do banco de dados automaticamente quando há mudanças nas entidades.
+Outras opções:
+none → Nenhuma alteração automática no banco.
+validate → Verifica se o esquema do banco está correto, mas não altera nada.
+create → Apaga e recria todas as tabelas ao iniciar a aplicação (perde dados!).
+create-drop → Apaga as tabelas ao encerrar a aplicação.
+
+* Mostra as queries SQL geradas pelo Hibernate no prompt:
+spring.jpa.show-sql=true
