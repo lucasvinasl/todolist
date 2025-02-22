@@ -2,7 +2,6 @@ package model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.scheduling.config.Task;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -125,7 +124,14 @@ public class User {
 
 
     // A Lista de Atividades do Usuário
-    private List<Task> tasks = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Task> taskList = new ArrayList<Task>();
+
+    /*
+        @OneToMany(mappedBy = "user") ->
+            1 usuário pode ter Varias Tasks
+            Quem mapeia/gerencia a classe Task é a variável User.
+     */
 
 
     // O Hibertnate/JPA utilizará um dos construtores para instanciar a Classe
@@ -163,20 +169,29 @@ public class User {
         this.password = password;
     }
 
+    public void setTaskList(List<Task> task){
+        this.taskList = task;
+    }
+
+    public List<Task> getTaskList(){
+        return taskList;
+    }
+
+
+
     @Override
     public boolean equals(Object object) {
         if (object == null || getClass() != object.getClass()) return false;
         User user = (User) object;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(tasks, user.tasks);
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(taskList, user.taskList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, tasks);
+        return Objects.hash(id, username, password, taskList);
     }
 
-
-    /*
+/*
     *
     * Equals vai verificar objetos Users iguais quanto aos seus atributos
     * O hashCode vai atribuir um valor hash para cada objeto
