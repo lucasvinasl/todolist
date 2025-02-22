@@ -4,7 +4,6 @@ import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repositories.TaskRepository;
 import repositories.UserRepository;
 import java.util.Optional;
 
@@ -14,8 +13,7 @@ public class UserServices {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private TaskRepository taskRepository;
+
 
     public User findUserById(Long id){
         Optional<User> user = this.userRepository.findById(id);
@@ -28,8 +26,6 @@ public class UserServices {
     public User createUser(User user){
         user.setId(null);
         user = this.userRepository.save(user);
-        this.taskRepository.saveAll(user.getTaskList());
-
         return user;
     }
 
@@ -91,7 +87,6 @@ public class UserServices {
     public User createUser(User user){
         user.setId(null);
         user = this.userRepository.save(user);
-        this.taskRepository.saveAll(user.getTaskList());
 
         return user;
     }
@@ -107,9 +102,6 @@ public class UserServices {
 
     user = this.userRepository.save(user):
     chama o metodo da persistencia do userRepository para salvar o usuario
-
-    this.taskRepository.saveAll(user.getTaskList()):
-    salva também as tasks desse usuario, caso já existam.
 
 
 ----------------------
