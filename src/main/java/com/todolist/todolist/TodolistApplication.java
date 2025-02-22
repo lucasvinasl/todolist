@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @EntityScan("model")
+// Dessa forma o Hibertnate/JPA procuram as entidades dentro do package models
 @SpringBootApplication()
 public class TodolistApplication {
 

@@ -26,6 +26,15 @@ public class Task {
     * Relação N:1 -> N tarefas estarão associadas 1 usuário, ou, 1 Usuário tem N Terefas
     */
 
+    /* @JoinColumn(name = "user_id", nullable = false, updatable = false)->
+        Especifica a chave estrangeira que liga a tabela Task à tabela User
+        user_id será a coluna que armazenará essa chave
+
+        nullable = false, updatable = false ->
+            Não será nula e nem será alterada.
+
+    */
+
 
     @Column(name = "description", length = 255, nullable = false)
     @NotNull

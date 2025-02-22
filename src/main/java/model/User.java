@@ -131,6 +131,7 @@ public class User {
         @OneToMany(mappedBy = "user") ->
             1 usuário pode ter Varias Tasks
             Quem mapeia/gerencia a classe Task é a variável User.
+            O atributo "user_id" da tabela Task aponta para a tabela User através do atributo "user".
      */
 
 
