@@ -1,6 +1,7 @@
 package model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -174,10 +175,14 @@ public class User {
         this.taskList = task;
     }
 
+    @JsonIgnore
     public List<Task> getTaskList(){
         return taskList;
     }
 
+    /*
+    JsonIgonore: Não vai retornar todas as tasks do usuário no json
+     */
 
 
     @Override

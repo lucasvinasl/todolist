@@ -3,10 +3,13 @@ package com.todolist.todolist;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EntityScan("model")
-// Dessa forma o Hibertnate/JPA procuram as entidades dentro do package models
 @SpringBootApplication()
+@EntityScan(basePackages = {"model"})
+@EnableJpaRepositories(basePackages = {"repositories"})
+@ComponentScan(basePackages = {"controllers", "services", "repositories"})
 public class TodolistApplication {
 
 	public static void main(String[] args) {
