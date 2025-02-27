@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import repositories.TaskRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +24,11 @@ public class TaskServices {
         return task.orElseThrow(() -> new RuntimeException(
                 "Tarefa não encontrada. Id: "+ id + "Tipo: " + Task.class.getName()
         ));
+    }
+
+    public List<Task> findAllByUserId(Long userId){
+        List<Task> listaTasks = this.taskRepository.findByUser_Id(userId);
+        return listaTasks;
     }
 
     @Transactional
