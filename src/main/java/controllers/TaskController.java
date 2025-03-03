@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import services.TaskServices;
+import services.UserServices;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -21,6 +22,10 @@ public class TaskController {
 
     @Autowired
     private TaskServices taskServices;
+
+    @Autowired
+    private UserServices userServices;
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Task> byId(@PathVariable Long id){
@@ -58,6 +63,7 @@ public class TaskController {
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Task>> findAllTasksByUserId(@PathVariable Long userId){
+        userServices.findUserById(userId);
         List<Task> tasks = this.taskServices.findAllByUserId(userId);
         return ResponseEntity.ok().body(tasks);
     }
