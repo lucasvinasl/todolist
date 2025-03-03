@@ -1,12 +1,12 @@
-package controllers;
+package com.todolist.controllers;
 
-import model.User;
+import com.todolist.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import services.UserServices;
+import com.todolist.services.UserServices;
 import javax.validation.Valid;
 import java.net.URI;
 

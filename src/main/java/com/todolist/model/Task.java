@@ -1,4 +1,4 @@
-package model;
+package com.todolist.model;
 
 
 import javax.persistence.*;

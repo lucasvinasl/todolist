@@ -1,11 +1,11 @@
-package services;
+package com.todolist.services;
 
-import model.Task;
-import model.User;
+import com.todolist.model.Task;
+import com.todolist.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repositories.TaskRepository;
+import com.todolist.repositories.TaskRepository;
 
 import java.util.List;
 import java.util.Optional;

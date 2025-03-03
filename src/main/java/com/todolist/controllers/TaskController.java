@@ -1,14 +1,13 @@
-package controllers;
+package com.todolist.controllers;
 
-import model.Task;
-import org.apache.coyote.Response;
+import com.todolist.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import services.TaskServices;
-import services.UserServices;
+import com.todolist.services.TaskServices;
+import com.todolist.services.UserServices;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -63,7 +62,7 @@ public class TaskController {
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Task>> findAllTasksByUserId(@PathVariable Long userId){
-        userServices.findUserById(userId);
+        this.userServices.findUserById(userId);
         List<Task> tasks = this.taskServices.findAllByUserId(userId);
         return ResponseEntity.ok().body(tasks);
     }
