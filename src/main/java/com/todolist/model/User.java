@@ -1,8 +1,8 @@
 package com.todolist.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 
 /*
@@ -22,9 +22,12 @@ import java.util.Objects;
 
 // Definir o nome da tabela a partir da constante TABLE_NAME
 @Table(name=User.TABLE_NAME)
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
 public class User {
-
 
     /*
      * Essas interfaces são utilizadas como grupos de validação nas anotações @NotNull, @NotEmpty e @Size,
@@ -126,6 +129,7 @@ public class User {
 
     // A Lista de Atividades do Usuário
     @OneToMany(mappedBy = "user")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Task> taskList = new ArrayList<Task>();
 
     /*
@@ -136,66 +140,6 @@ public class User {
      */
 
 
-    // O Hibertnate/JPA utilizará um dos construtores para instanciar a Classe
-    public User(){
-
-    }
-
-    public User(Long id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setTaskList(List<Task> task){
-        this.taskList = task;
-    }
-
-    @JsonIgnore
-    public List<Task> getTaskList(){
-        return taskList;
-    }
-
-    /*
-    JsonIgonore: Não vai retornar todas as tasks do usuário no json
-     */
-
-
-    @Override
-    public boolean equals(Object object) {
-        if (object == null || getClass() != object.getClass()) return false;
-        User user = (User) object;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(taskList, user.taskList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, password, taskList);
-    }
 
 /*
     *
