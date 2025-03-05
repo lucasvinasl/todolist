@@ -1,15 +1,22 @@
 package com.todolist.services;
 
 import com.todolist.model.User;
+import com.todolist.model.enums.ProfileEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.todolist.repositories.UserRepository;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class UserServices {
 
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -25,6 +32,8 @@ public class UserServices {
     @Transactional
     public User createUser(User user){
         user.setId(null);
+        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setProfiles(Stream.of(ProfileEnum.USER.getCode()).collect(Collectors.toSet()));
         user = this.userRepository.save(user);
         return user;
     }
@@ -33,6 +42,7 @@ public class UserServices {
     public User updateUser(User user){
         User newUser = findUserById(user.getId());
         newUser.setPassword(user.getPassword());
+        newUser.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
         return this.userRepository.save(newUser);
     }
 
