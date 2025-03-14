@@ -140,6 +140,11 @@ public class User {
             1 usuário pode ter Varias Tasks
             Quem mapeia/gerencia a classe Task é a variável User.
             O atributo "user_id" da tabela Task aponta para a tabela User através do atributo "user".
+
+     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+     Quando retornar um usuário, não irá retornar as suas tasks.
+     Mas quando retornar uma task, trará também o seu usuário.
+
      */
 
 

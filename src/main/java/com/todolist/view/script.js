@@ -1,8 +1,12 @@
+// URL padrão que vai rodar o front nesse primeiro momento
 const url = "http://localhost:8080/task/user/1";
 
+//Função para esconder o ícone de loading
 function hideLoader() {
   document.getElementById("loading").style.display = "none";
 }
+
+
 
 function show(tasks) {
 
